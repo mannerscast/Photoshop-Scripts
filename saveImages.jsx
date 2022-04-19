@@ -218,7 +218,7 @@ function processPromoFiles(t,lt) {
 
 	newDoc = documents.add(1280,720,72,"tempDoc", NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
 	app.activeDocument = doc;
-	var assetPath = "~/Desktop/Assets/Title Graphics/";
+	var assetPath = "~/Documents/GitHub/Photoshop Scripts/Assets/Title Graphics/";
 
 	// import in reverse order
 	var tGraphicPsdLayout = importImage(t,newDoc,'tGraphicPsdLayout',255,30,771,434,false);
