@@ -1,6 +1,8 @@
 ﻿#include "ImportFunctions.jsx"
 #target photoshop
 
+//changes
+
 var scriptTitle = 'Save Script v2.5';
 if (documents.length != 0) {
 	var originalUnits = preferences.rulerUnits;
