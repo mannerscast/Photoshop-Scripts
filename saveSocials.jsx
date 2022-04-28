@@ -15,7 +15,7 @@
 
 var scriptTitle = 'Social Save Script v1.2';
 
-var assetPath = "~/Desktop/Assets/Social/";
+var assetPath = "~/Documents/GitHub/Photoshop-Scripts/Assets/Social/";
 
 /*******Asset Paths********/
 
@@ -62,8 +62,8 @@ if (documents.length != 0) {
 	
 	if ((hLayout && vLayout && sqLayout) || (hLayout && sqLayout)  || (sqLayout && wLayout)) {
 		
-		//docName = docName.split('_').join('-').replace(/\b./g, function(m){ return m.toUpperCase(); }).split(' ').join('_'); //Replaces spaces with underscores and capitalizes
-		
+		docName = docName.split('-').join('_');
+
 		var newDoc = documents.add(1280,720,72,"tempDoc", NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
 		app.activeDocument = doc; 
 		
@@ -84,7 +84,7 @@ if (documents.length != 0) {
 			var socialPsdLayoutSm = importImage(sqLayout,newDoc,'socialPsdLayoutSm',774,394,28,28,false);
 			
 			newDoc.trim(TrimType.TRANSPARENT);
-			saveImage('Thumbs',docName+'#preset=social_orientations','png');
+			saveImage('_Images',docName+'_OR','png');
 			
 			newDoc.activeHistoryState = newDoc.historyStates[newDoc.historyStates.length - 2];
 		
@@ -92,7 +92,7 @@ if (documents.length != 0) {
 			show(socialPsdLayout); show(socialPsdLayoutSm); show(socialPsdText); show(socialPsdLayers);
 
 			newDoc.trim(TrimType.TRANSPARENT);
-			saveImage('Thumbs',docName+'#preset=social_psd_demo','png');
+			//saveImage('_Images',docName+'_DEMO','png');
 			
 		} else if (hLayout && sqLayout) { //Sunday Social or VMC
 			var socialHOrientationLayout = importImage(hLayout,newDoc,'socialHOrientationLayout',498,99,740,416,true);
@@ -105,7 +105,7 @@ if (documents.length != 0) {
 			var socialPsdLayoutSm = importImage(sqLayout,newDoc,'socialPsdLayoutSm',774,394,28,28,false);
 			
 			newDoc.trim(TrimType.TRANSPARENT);
-			saveImage('Thumbs',docName+'#preset=social_orientations','png');
+			saveImage('_Images',docName+'_OR','png');
 			
 			newDoc.activeHistoryState = newDoc.historyStates[newDoc.historyStates.length - 2];
 		
@@ -113,7 +113,7 @@ if (documents.length != 0) {
 			show(socialPsdLayout); show(socialPsdLayoutSm); show(socialPsdText); show(socialPsdLayers);
 
 			newDoc.trim(TrimType.TRANSPARENT);
-			saveImage('Thumbs',docName+'#preset=social_psd_demo','png');
+			//saveImage('_Images',docName+'_DEMO','png');
 		
 		} else if (sqLayout && wLayout) { //Ministry Pass
 			var socialWOrientationLayout = importImage(wLayout,newDoc,'socialWOrientationLayout',261,23,758,281,true);
@@ -121,7 +121,7 @@ if (documents.length != 0) {
 			var socialOrientationText = importImage(assetPath+"socialOrientationText_MP.png",newDoc,'socialOrientationText',724,403,null,null,true);
 			
 			newDoc.trim(TrimType.TRANSPARENT);
-			saveImage('Thumbs',docName+'#preset=social_orientations','png');
+			saveImage('_Images',docName+'_OR','png');
 		}
 	
 		if (closeHLayout) try { getParentDocument(closeHLayout).close(SaveOptions.DONOTSAVECHANGES); } catch(e) {}

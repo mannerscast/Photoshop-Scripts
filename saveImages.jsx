@@ -1,5 +1,8 @@
 ﻿#include "ImportFunctions.jsx"
 #target photoshop
+
+//changes
+
 var scriptTitle = 'Save Script v2.5';
 if (documents.length != 0) {
 	var originalUnits = preferences.rulerUnits;
@@ -20,7 +23,6 @@ if (documents.length != 0) {
 	var thisFile = doc.path + '/' + doc.name; // For re-opening
 	 
 	var docName = getDocName(activeDocument);
-	var ratio = getDocName(activeDocument);
 	
 	try{
 		if (docName.search(/_wide/i) != -1) docName = docName.slice(0,docName.search(/_wide/i));
@@ -28,10 +30,9 @@ if (documents.length != 0) {
 		else if (docName.search(/_std/i) != -1) docName = docName.slice(0,docName.search(/_std/i));
 		else if (docName.search(/-std/i) != -1) docName = docName.slice(0,docName.search(/-std/i));
 	} catch (e) { alert('An error has occured while collecting the file name.'); }
-	docName += (widescreen?"-WIDE":"")+(stdscreen?"-STD":"");
+	docName += (widescreen?"_WIDE":"")+(stdscreen?"_STD":"");
 	
 	doc.suspendHistory(scriptTitle, 'main()');
-	//main();
 	function main() { 
 		if (!widescreen && !stdscreen) confirmed = confirm('The document is set to an incorrect aspect ratio. Would you like to continue?');
 		if (confirmed) {
@@ -72,7 +73,7 @@ if (documents.length != 0) {
 			createDialog();
 			
 		}//confirmed
-	} //main()
+	}
 	
 	preferences.rulerUnits = originalUnits; 
 } else { alert('Error: No documents open.'); }
@@ -182,31 +183,31 @@ function saveFiles(makeThumbs) {
 	try {
 		
 		if (widescreen) { if (doc.width > 1920 && doc.height > 1080) doc.resizeImage(UnitValue(1920,'px'), UnitValue(1080,'px'), 72, ResampleMethod.BICUBIC); } //Resizes Widescreen
-		if (stdscreen) {  if (doc.width > 1920 && doc.height > 1080) doc.resizeImage(UnitValue(1920,'px'), UnitValue(1080,'px'), 72, ResampleMethod.BICUBIC); } //Resizes Standard Screen
+		if (stdscreen) {  if (doc.width > 1440 && doc.height > 1080) doc.resizeImage(UnitValue(1440,'px'), UnitValue(1080,'px'), 72, ResampleMethod.BICUBIC); } //Resizes Standard Screen
 	
 	} catch (e) { alert ('Resize Error: '+e); }
 	
 	try {
 		
-		if (t) { t.visible = true; saveImage('Images','TT1_'+docName,'jpg'); t.visible = false; }
+		if (t) { t.visible = true; saveImage('_Images','TT1_'+docName,'jpg'); t.visible = false; }
 		
-		if (t_nv) { t_nv.visible = true; saveImage('Images',docName,'jpg'); t_nv.visible = false; }
+		if (t_nv) { t_nv.visible = true; saveImage('_Images','TT2_'+docName,'jpg'); t_nv.visible = false; }
 		
-		if (t_nt) { t_nt.visible = true; saveImage('Images',docName,'jpg'); t_nt.visible = false; }
+		if (t_nt) { t_nt.visible = true; saveImage('_Images','TT3_'+docName,'jpg'); t_nt.visible = false; }
 		
-		if (c) { c.visible = true; saveImage('Images',docName,'jpg'); c.visible = false; }
+		if (c) { c.visible = true; saveImage('_Images','Alt1_'+docName,'jpg'); c.visible = false; }
 		
-		if (c_nv) { c_nv.visible = true; saveImage('Images',docName,'jpg'); c_nv.visible = false; }
+		if (c_nv) { c_nv.visible = true; saveImage('_Images','Alt2_'+docName,'jpg'); c_nv.visible = false; }
 		
-		if (c_nt) { c_nt.visible = true; saveImage('Images',docName,'jpg'); c_nt.visible = false; }
+		if (c_nt) { c_nt.visible = true; saveImage('_Images','Alt3_'+docName,'jpg'); c_nt.visible = false; }
 		
-		if (bg) { bg.visible = true; saveImage('Images',docName,'jpg'); bg.visible = false; }
+		if (bg) { bg.visible = true; saveImage('_Images',docName+'#preset=tg_bg','jpg'); bg.visible = false; }
 		
-		if (a) { a.visible = true; saveImage('Images',docName,'jpg'); a.visible = false; }
+		if (a) { a.visible = true; saveImage('_Images','Alt1_'+docName,'jpg'); a.visible = false; }
 		
-		if (a_nt) { a_nt.visible = true; saveImage('Images',docName,'jpg'); a_nt.visible = false; }
+		if (a_nt) { a_nt.visible = true; saveImage('_Images','Alt2_'+docName,'jpg'); a_nt.visible = false; }
 		
-		if (lt) { lt.visible = true; saveImage('Images',docName,'png'); lt.visible = false; }
+		if (lt) { lt.visible = true; saveImage('_Images',docName+'#preset=tg_lower_third_download','png'); lt.visible = false; }
 				
 	} catch (e) { alert('Saving Error: '+e); }
 	
@@ -218,7 +219,7 @@ function processPromoFiles(t,lt) {
 
 	newDoc = documents.add(1280,720,72,"tempDoc", NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
 	app.activeDocument = doc;
-	var assetPath = "~/Documents/GitHub/Photoshop Scripts/Assets/Title Graphics/";
+	var assetPath = "~/Documents/GitHub/Photoshop-Scripts/Assets/Title Graphics/";
 
 	// import in reverse order
 	var tGraphicPsdLayout = importImage(t,newDoc,'tGraphicPsdLayout',255,30,771,434,false);
@@ -230,13 +231,13 @@ function processPromoFiles(t,lt) {
 	var ltHeight = Math.round(getHeight(lt) * (1280/2880));
 	var tGraphicCheckerLayout = importImage(lt,newDoc,'tGraphicCheckerLayout',0,480-(ltHeight-240),1280,ltHeight,true);
 	
-	saveImage('Images',docName,'jpg');
+	saveImage('_Images',docName+'#preset=tg_lower_third_preview','jpg');
 	
 	hide(tGraphicCheckerLayout); hide(tGraphicCheckerBG);
 	show(tGraphicPsdLayoutSm); show(tGraphicPsdLayers); show(tGraphicPsdLayout);  show(tGraphicPsdText);
 	
 	newDoc.trim(TrimType.TRANSPARENT);
-	saveImage('Images',docName,'png');
+	saveImage('_Images',docName+'#preset=tg_psd_demo','png');
 	
 	newDoc.close(SaveOptions.DONOTSAVECHANGES);
 }
@@ -275,7 +276,6 @@ function mergeLowerThird () {
 		}
 	}
 }
-
 function copyMask(sourceLayer, targetLayer) { 
 	try {
 		var idChnl = charIDToTypeID( "Chnl" );
@@ -327,4 +327,4 @@ function hasLayerMask(targetLayer) {
 		if ( desc.hasKey( keyUserMaskEnabled ) ) { return true; }   
 	}catch(e) { }
 	return false; 
-}
+}  
