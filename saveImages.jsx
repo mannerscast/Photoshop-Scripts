@@ -29,6 +29,8 @@ if (documents.length != 0) {
 		else if (docName.search(/-wide/i) != -1) docName = docName.slice(0,docName.search(/-wide/i));
 		else if (docName.search(/_std/i) != -1) docName = docName.slice(0,docName.search(/_std/i));
 		else if (docName.search(/-std/i) != -1) docName = docName.slice(0,docName.search(/-std/i));
+		else if (docName.search(/-MASTER/i) != -1) docName = docName.slice(0,docName.search(/-MASTER/i));
+		else if (docName.search(/_MASTER/i) != -1) docName = docName.slice(0,docName.search(/_MASTER/i));
 	} catch (e) { alert('An error has occured while collecting the file name.'); }
 	docName += (widescreen?"_WIDE":"")+(stdscreen?"_STD":"");
 	
