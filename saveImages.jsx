@@ -209,7 +209,7 @@ function saveFiles(makeThumbs) {
 		
 		if (a_nt) { a_nt.visible = true; saveImage('_Images','Alt2_'+docName,'jpg'); a_nt.visible = false; }
 		
-		if (lt) { lt.visible = true; saveImage('_Images',docName+'#preset=tg_lower_third_download','png'); lt.visible = false; }
+		if (lt) { lt.visible = true; saveImage('_Images','L3_'+docName,'png'); lt.visible = false; }
 				
 	} catch (e) { alert('Saving Error: '+e); }
 	
@@ -233,13 +233,13 @@ function processPromoFiles(t,lt) {
 	var ltHeight = Math.round(getHeight(lt) * (1280/2880));
 	var tGraphicCheckerLayout = importImage(lt,newDoc,'tGraphicCheckerLayout',0,480-(ltHeight-240),1280,ltHeight,true);
 	
-	saveImage('_Images',docName+'#preset=tg_lower_third_preview','jpg');
+	saveImage('_Images','L3_TH_'+docName,'jpg');
 	
 	hide(tGraphicCheckerLayout); hide(tGraphicCheckerBG);
 	show(tGraphicPsdLayoutSm); show(tGraphicPsdLayers); show(tGraphicPsdLayout);  show(tGraphicPsdText);
 	
 	newDoc.trim(TrimType.TRANSPARENT);
-	saveImage('_Images',docName+'#preset=tg_psd_demo','png');
+	//saveImage('_Images',docName+'#preset=tg_psd_demo','png');
 	
 	newDoc.close(SaveOptions.DONOTSAVECHANGES);
 }
