@@ -219,7 +219,7 @@ function saveFiles(makeThumbs) {
 
 function processPromoFiles(t,lt) {
 
-	newDoc = documents.add(1620,720,72,"tempDoc", NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
+	newDoc = documents.add(1280,720,72,"tempDoc", NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
 	app.activeDocument = doc;
 	var assetPath = "~/Documents/GitHub/Photoshop-Scripts/Assets/Title Graphics/";
 
@@ -230,7 +230,7 @@ function processPromoFiles(t,lt) {
 	var tGraphicPsdText = importImage(assetPath+"tGraphicPsdText.png",newDoc,'tGraphicPsdText',329,554,null,null,false);
 	
 	var tGraphicCheckerBG = importImage(assetPath+"tGraphicCheckerBG.png",newDoc,'tGraphicCheckerBG',0,0,null,null,true);
-	var ltHeight = Math.round(getHeight(lt) * (1620/2880));
+	var ltHeight = Math.round(getHeight(lt)); // * (1620/2880));
 	var tGraphicCheckerLayout = importImage(lt,newDoc,'tGraphicCheckerLayout',0,480-(ltHeight-240),1620,ltHeight,true);
 	
 	saveImage('_Images','L3_TH_'+docName,'jpg');
@@ -246,7 +246,7 @@ function processPromoFiles(t,lt) {
 
 function mergeLowerThird () {
 	var preHeight = doc.height;
-	var ltHeight = doc.height/3;
+	var ltHeight = doc.height/2;
 	if (mergeFolder != undefined) {
 		if (hasLayerMask('LOWER THIRD')) { 
 			var lowerThird = doc.layers.getByName('LOWER THIRD');
