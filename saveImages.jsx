@@ -231,8 +231,10 @@ function processPromoFiles(t,lt) {
 	
 	var tGraphicCheckerBG = importImage(assetPath+"tGraphicCheckerBG.png",newDoc,'tGraphicCheckerBG',0,0,null,null,true);
 	var ltHeight = Math.round(getHeight(lt) * (1280/2880));
-	var tGraphicCheckerLayout = importImage(lt,newDoc,'tGraphicCheckerLayout',0,ltheight/*480-(ltHeight-240)*/,1620,ltHeight,true);
+	var tGraphicCheckerLayout = importImage(lt,newDoc,'tGraphicCheckerLayout',0,ltHeight,1620,ltHeight,true);
 	
+	//480-(ltHeight-240)
+
 	saveImage('_Images','L3_TH_'+docName,'jpg');
 	
 	hide(tGraphicCheckerLayout); hide(tGraphicCheckerBG);
