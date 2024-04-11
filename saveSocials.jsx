@@ -1,15 +1,4 @@
-﻿/*
-	
-	v1.0 - Original Version
-	v1.1 - Added Sunday Social functionality
-	v1.2 - Added Sunday Social PSD save functionality as well as optimization
-	v1.3 - More optimization
-	v1.4 - Fixed TrimType bug causing it to trim white pixles
-	v1.5 - Changed the script to run from the master file
-	v1.6 - Added new functions for saving and importing, cleaned up and simplified
-	
-*/
-
+﻿
 #include "ImportFunctions.jsx"
 #target photoshop
 
@@ -38,16 +27,32 @@ if (documents.length != 0) {
 		var hLayerRef = findLayers ('Social Landscape', true);
 		var vLayerRef = findLayers ('Social Portrait', true);
 		var sqLayerRef = findLayers ('Social Square', true);
+
+		var layerTitles = findLayers ('title', true);
+		var layerSubtitles = findLayers ('subtitle', true);
 		
 		show(hLayerRef); hide(vLayerRef); hide(sqLayerRef);
 		hLayout = merge(hLayerRef);
+		saveImage('With Text',docName+'Social Landscape','png');
+		hide(layerTitles); hide(layerSubtitles);
+		saveImage('Without Text',docName+'Social Landscape','png');
+		show(layerTitles); show(layerSubtitles);
+
 		hide(hLayerRef); show(vLayerRef);
 		vLayout = merge(vLayerRef);
+		saveImage('With Text',docName+'Social Portrait','png');
+		hide(layerTitles); hide(layerSubtitles);
+		saveImage('Without Text',docName+'Social Portrait','png');
+		show(layerTitles); show(layerSubtitles);
+
 		hide(vLayerRef); show(sqLayerRef);
 		sqLayout = merge(sqLayerRef);
-		
-		//SAVE OUT IMAGES HERE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	
+		saveImage('With Text',docName+'Social Square','png');
+		hide(layerTitles); hide(layerSubtitles);
+		saveImage('Without Text',docName+'Social Square','png');
+		show(layerTitles); show(layerSubtitles);
+
+
 	} else { 
 		for (var i = 0; i < app.documents.length; i++) {
 			app.activeDocument = app.documents[i]; 
@@ -135,6 +140,5 @@ if (documents.length != 0) {
 		
 	preferences.rulerUnits = originalUnits; 
 } // No active documents
-
 
 function getDocType() { return activeDocument.name.slice(activeDocument.name.lastIndexOf('.')+1,activeDocument.name.length).toLowerCase(); }
