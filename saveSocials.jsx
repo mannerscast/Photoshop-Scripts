@@ -33,23 +33,23 @@ if (documents.length != 0) {
 		
 		show(hLayerRef); hide(vLayerRef); hide(sqLayerRef);
 		hLayout = merge(hLayerRef);
-		saveImage('_Images/With Text',docName+'Social Landscape','png');
+		saveImage('_Images/With Text','Social Landscape','png');
 		hide(layerTitles); hide(layerSubtitles);
-		saveImage('_Images/Without Text',docName+'Social Landscape','png');
+		saveImage('_Images/Without Text','Social Landscape','png');
 		show(layerTitles); show(layerSubtitles);
 
 		hide(hLayerRef); show(vLayerRef);
 		vLayout = merge(vLayerRef);
-		saveImage('_Images/With Text',docName+'Social Portrait','png');
+		saveImage('_Images/With Text','Social Portrait','png');
 		hide(layerTitles); hide(layerSubtitles);
-		saveImage('_Images/Without Text',docName+'Social Portrait','png');
+		saveImage('_Images/Without Text','Social Portrait','png');
 		show(layerTitles); show(layerSubtitles);
 
 		hide(vLayerRef); show(sqLayerRef);
 		sqLayout = merge(sqLayerRef);
-		saveImage('_Images/With Text',docName+'Social Square','png');
+		saveImage('_Images/With Text','Social Square','png');
 		hide(layerTitles); hide(layerSubtitles);
-		saveImage('_Images/Without Text',docName+'Social Square','png');
+		saveImage('_Images/Without Text','Social Square','png');
 		show(layerTitles); show(layerSubtitles);
 
 
@@ -136,7 +136,7 @@ if (documents.length != 0) {
 		
 		newDoc.close(SaveOptions.DONOTSAVECHANGES);  
 	
-	} else alert('Error: Missing social layouts');
+	} //else alert('Error: Missing social layouts');
 		
 	preferences.rulerUnits = originalUnits; 
 } // No active documents
