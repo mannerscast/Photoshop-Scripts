@@ -238,7 +238,7 @@ function processPromoFiles(t,lt) {
 	hide(tGraphicCheckerLayout); hide(tGraphicCheckerBG);
 	show(tGraphicPsdLayoutSm); show(tGraphicPsdLayers); show(tGraphicPsdLayout);  show(tGraphicPsdText);
 	
-	newDoc.trim(TrimType.TRANSPARENT);
+	//newDoc.trim(TrimType.TRANSPARENT);
 	//saveImage('_Images',docName+'#preset=tg_psd_demo','png');
 	
 	newDoc.close(SaveOptions.DONOTSAVECHANGES);
