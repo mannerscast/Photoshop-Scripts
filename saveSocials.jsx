@@ -30,27 +30,28 @@ if (documents.length != 0) {
 
 		var layerTitles = findLayers ('title', true);
 		var layerSubtitles = findLayers ('subtitle', true);
+		var layerText = findLayers ('text', true);
 		
 		show(hLayerRef); hide(vLayerRef); hide(sqLayerRef);
 		hLayout = merge(hLayerRef);
 		saveImage('_Images/With Text',"Social Landscape",'png');
-		hide(layerTitles); hide(layerSubtitles);
+		hide(layerTitles); hide(layerSubtitles); hide(layerText);
 		saveImage('_Images/Without Text',"Social Landscape",'png');
-		show(layerTitles); show(layerSubtitles);
+		show(layerTitles); show(layerSubtitles); show(layerText);
 
 		hide(hLayerRef); show(vLayerRef);
 		vLayout = merge(vLayerRef);
 		saveImage('_Images/With Text',"Social Portrait",'png');
-		hide(layerTitles); hide(layerSubtitles);
+		hide(layerTitles); hide(layerSubtitles); hide(layerText);
 		saveImage('_Images/Without Text',"Social Portrait",'png');
-		show(layerTitles); show(layerSubtitles);
+		show(layerTitles); show(layerSubtitles); show(layerText);
 
 		hide(vLayerRef); show(sqLayerRef);
 		sqLayout = merge(sqLayerRef);
 		saveImage('_Images/With Text',"Social Square",'png');
-		hide(layerTitles); hide(layerSubtitles);
+		hide(layerTitles); hide(layerSubtitles); hide(layerText);
 		saveImage('_Images/Without Text',"Social Square",'png');
-		show(layerTitles); show(layerSubtitles);
+		show(layerTitles); show(layerSubtitles); show(layerText);
 
 
 	} else { 
