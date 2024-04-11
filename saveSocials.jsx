@@ -33,23 +33,23 @@ if (documents.length != 0) {
 		
 		show(hLayerRef); hide(vLayerRef); hide(sqLayerRef);
 		hLayout = merge(hLayerRef);
-		saveImage('With Text',docName+'Social Landscape','png');
+		saveImage('_Images/With Text',docName+'Social Landscape','png');
 		hide(layerTitles); hide(layerSubtitles);
-		saveImage('Without Text',docName+'Social Landscape','png');
+		saveImage('_Images/Without Text',docName+'Social Landscape','png');
 		show(layerTitles); show(layerSubtitles);
 
 		hide(hLayerRef); show(vLayerRef);
 		vLayout = merge(vLayerRef);
-		saveImage('With Text',docName+'Social Portrait','png');
+		saveImage('_Images/With Text',docName+'Social Portrait','png');
 		hide(layerTitles); hide(layerSubtitles);
-		saveImage('Without Text',docName+'Social Portrait','png');
+		saveImage('_Images/Without Text',docName+'Social Portrait','png');
 		show(layerTitles); show(layerSubtitles);
 
 		hide(vLayerRef); show(sqLayerRef);
 		sqLayout = merge(sqLayerRef);
-		saveImage('With Text',docName+'Social Square','png');
+		saveImage('_Images/With Text',docName+'Social Square','png');
 		hide(layerTitles); hide(layerSubtitles);
-		saveImage('Without Text',docName+'Social Square','png');
+		saveImage('_Images/Without Text',docName+'Social Square','png');
 		show(layerTitles); show(layerSubtitles);
 
 
