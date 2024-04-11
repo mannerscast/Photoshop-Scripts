@@ -230,7 +230,7 @@ function processPromoFiles(t,lt) {
 	var tGraphicPsdText = importImage(assetPath+"tGraphicPsdText.png",newDoc,'tGraphicPsdText',329,554,null,null,false);
 	
 	var tGraphicCheckerBG = importImage(assetPath+"tGraphicCheckerBG.png",newDoc,'tGraphicCheckerBG',0,0,null,null,true);
-	var ltHeight = Math.round(getHeight(lt) * (1280/2880));
+	//var ltHeight = Math.round(getHeight(lt) * (1280/2880));
 	var tGraphicCheckerLayout = importImage(lt,newDoc,'tGraphicCheckerLayout',0,480-(ltHeight-240),1280,ltHeight,true);
 	
 	saveImage('_Images','L3_TH_'+docName,'jpg');
@@ -238,7 +238,7 @@ function processPromoFiles(t,lt) {
 	hide(tGraphicCheckerLayout); hide(tGraphicCheckerBG);
 	show(tGraphicPsdLayoutSm); show(tGraphicPsdLayers); show(tGraphicPsdLayout);  show(tGraphicPsdText);
 	
-	//newDoc.trim(TrimType.TRANSPARENT);
+	newDoc.trim(TrimType.TRANSPARENT);
 	//saveImage('_Images',docName+'#preset=tg_psd_demo','png');
 	
 	newDoc.close(SaveOptions.DONOTSAVECHANGES);
@@ -317,7 +317,6 @@ function copyMask(sourceLayer, targetLayer) {
 		return true;
 	} catch (e) { return false; }
 }
-
 function hasLayerMask(targetLayer) {
 	selectLayer (targetLayer);
 	try {   
