@@ -175,7 +175,7 @@ function saveFiles(makeThumbs) {
 			show(LOWERTHIRD);
 			lt = mergeLowerThird();
 			
-			if (makeThumbs) processPromoFiles(t,lt);
+			//if (makeThumbs) duplicateL3(t,lt);
 			
 		}
 	} catch (e) { alert ('Merge Error: '+e); }
@@ -210,6 +210,14 @@ function saveFiles(makeThumbs) {
 		if (a_nt) { a_nt.visible = true; saveImage('_Images','Alt2_'+docName,'jpg'); a_nt.visible = false; }
 		
 		if (lt) { lt.visible = true; saveImage('_Images','L3_'+docName,'png'); lt.visible = false; }
+
+		if (lt) { 
+			// Resize the document to 1280x720
+			app.activeDocument = doc; // Make sure the document is active
+			doc.resizeImage(UnitValue(1280, 'px'), UnitValue(720, 'px'), 72, ResampleMethod.BICUBIC);
+			addBG();
+			lt.visible = true; saveImage('_Images','L3_TH_'+docName,'jpg'); lt.visible = false; 
+		}
 				
 	} catch (e) { alert('Saving Error: '+e); }
 	
@@ -217,31 +225,36 @@ function saveFiles(makeThumbs) {
 	
 }
 
-function processPromoFiles(t,lt) {
+function addBG() {
+    var imagePath = "~/Documents/GitHub/Photoshop-Scripts/Assets/Title Graphics/tGraphicCheckerBG.png";
+    var file = new File(imagePath);
 
-	newDoc = documents.add(1280,720,72,"tempDoc", NewDocumentMode.RGB, DocumentFill.TRANSPARENT);
-	app.activeDocument = doc;
-	var assetPath = "~/Documents/GitHub/Photoshop-Scripts/Assets/Title Graphics/";
+    if (!file.exists) {
+        alert("Checkerboard image not found!");
+        return;
+    }
 
-	// import in reverse order
-	var tGraphicPsdLayout = importImage(t,newDoc,'tGraphicPsdLayout',255,30,771,434,false);
-	var tGraphicPsdLayers = importImage(assetPath+"tGraphicPsdLayers.png",newDoc,'tGraphicPsdLayers',650,185,null,null,false);
-	var tGraphicPsdLayoutSm = importImage(t,newDoc,'tGraphicPsdLayoutSm',759,397,43,22,false);
-	var tGraphicPsdText = importImage(assetPath+"tGraphicPsdText.png",newDoc,'tGraphicPsdText',329,554,null,null,false);
-	
-	var tGraphicCheckerBG = importImage(assetPath+"tGraphicCheckerBG.png",newDoc,'tGraphicCheckerBG',0,0,null,null,true);
-	//var ltHeight = Math.round(getHeight(lt) * (1280/2880));
-	var tGraphicCheckerLayout = importImage(lt,newDoc,'tGraphicCheckerLayout',0,480-(ltHeight-240),1280,ltHeight,true);
-	
-	saveImage('_Images','L3_TH_'+docName,'jpg');
-	
-	hide(tGraphicCheckerLayout); hide(tGraphicCheckerBG);
-	show(tGraphicPsdLayoutSm); show(tGraphicPsdLayers); show(tGraphicPsdLayout);  show(tGraphicPsdText);
-	
-	newDoc.trim(TrimType.TRANSPARENT);
-	//saveImage('_Images',docName+'#preset=tg_psd_demo','png');
-	
-	newDoc.close(SaveOptions.DONOTSAVECHANGES);
+    // Create a new layer for the checkerboard background
+    var bgLayer = doc.artLayers.add();
+    bgLayer.name = "Checkerboard Background";
+
+    // Load the checkerboard image
+    var checkerboardDoc = app.open(file);
+    var checkerboardLayer = checkerboardDoc.artLayers[0]; // Assuming the checkerboard pattern is the first layer
+
+    // Copy the checkerboard pattern to the clipboard
+    checkerboardLayer.copy();
+    checkerboardDoc.close(SaveOptions.DONOTSAVECHANGES);
+
+    // Paste the checkerboard pattern into the new layer
+    doc.activeLayer = bgLayer;
+    doc.paste();
+
+    // Move the checkerboard background layer to the bottom
+    activeDocument.activeLayer.move(activeDocument.layers[activeDocument.layers.length - 1], ElementPlacement.PLACEAFTER);
+
+    // Set opacity of the checkerboard background layer
+    bgLayer.opacity = 50; // Set opacity to 50%
 }
 
 function mergeLowerThird () {
